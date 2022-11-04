@@ -1,18 +1,22 @@
 class Node {
-  constructor(value, next){
-    this.value= value;
-    this.next=null;
+  constructor(value, next) {
+    this.value = value;
+    this.next = null;
   }
 }
-
 
 class LinkedList {
-  constructor(){
-    this.list={}
+  constructor() {
+    this.list = {};
   }
   append(value) {
-    if(Object.entries(this.list).length === 0) this.list = new Node(value)
+    if (Object.entries(this.list).length === 0) this.list = new Node(value);
+    else {
+      let nextNode = this.list;
+      while (nextNode.next !== null) nextNode = nextNode.next;
+      nextNode.next = new Node(value);
+    }
   }
 }
 
-let myLinkedList = new LinkedList()
+let myLinkedList = new LinkedList();
