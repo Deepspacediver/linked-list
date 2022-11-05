@@ -89,19 +89,29 @@ class LinkedList {
     return false;
   }
   find(value, object = this.head) {
-    if(!this.contains(value)) return null
+    if (!this.contains(value)) return null;
     let index = 0;
     for (const key in object) {
-      if (object[key] === value) return index+=0;
+      if (object[key] === value) return (index += 0);
       else if (typeof object[key] === "object") {
-        index+=1;
+        index += 1;
         index += this.find(value, object[key]);
       }
     }
-    return index
+    return index;
+  }
+  toString() {
+    let node = this.head;
+    let returnedString = "";
+    while (node !== null) {
+      let nodeInString = `(${node.value}) -> `;
+      returnedString += nodeInString;
+      node = node.next;
+    }
+    return returnedString + "null";
   }
 }
 let myLinkedList = new LinkedList();
 
-myLinkedList.append("value").append("second").append("tail");
-console.log(myLinkedList.at(0));
+myLinkedList.append("maybe").append("second").append("tail");
+console.log(myLinkedList.toString());
