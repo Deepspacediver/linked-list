@@ -80,16 +80,28 @@ class LinkedList {
     }
     return this;
   }
-  contains(value ,object=this){
+  contains(value, object = this) {
     for (const key in object) {
-      if (typeof object[key] === 'object') return this.contains(value, object[key])
-      else if(object[key] === value) return true
+      if (object[key] === value) return true;
+      else if (typeof object[key] === "object")
+        return this.contains(value, object[key]);
     }
-    return false
+    return false;
+  }
+  find(value, object = this.head) {
+    if(!this.contains(value)) return null
+    let index = 0;
+    for (const key in object) {
+      if (object[key] === value) return index+=0;
+      else if (typeof object[key] === "object") {
+        index+=1;
+        index += this.find(value, object[key]);
+      }
+    }
+    return index
   }
 }
-
 let myLinkedList = new LinkedList();
 
-myLinkedList.append("value").append('tail')
+myLinkedList.append("value").append("second").append("tail");
 console.log(myLinkedList.at(0));
