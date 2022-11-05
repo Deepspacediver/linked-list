@@ -12,6 +12,11 @@ class LinkedList {
   isListEmpty() {
     return this.head === null;
   }
+  traverse() {
+    let nextNode = this.head;
+    while (nextNode.next !== null) nextNode = nextNode.next;
+    return nextNode;
+  }
   append(value) {
     if (this.isListEmpty()) this.head = new Node(value);
     else {
@@ -64,9 +69,27 @@ class LinkedList {
       return currNode === null ? "No such index in the list" : currNode;
     }
   }
+  pop() {
+    if (this.isListEmpty()) return "Empty list";
+    if (this.getSize() === 1) {
+      this.head = null;
+    } else {
+      let nextNode = this.head;
+      while (nextNode.next.next !== null) nextNode = nextNode.next;
+      nextNode.next = null;
+    }
+    return this;
+  }
+  contains(value ,object=this){
+    for (const key in object) {
+      if (typeof object[key] === 'object') return this.contains(value, object[key])
+      else if(object[key] === value) return true
+    }
+    return false
+  }
 }
 
 let myLinkedList = new LinkedList();
 
-myLinkedList.append("value").append("second-value").append("tail");
-console.log(myLinkedList.at(2));
+myLinkedList.append("value").append('tail')
+console.log(myLinkedList.at(0));
